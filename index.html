@@ -7,10 +7,18 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="glitch" aria-hidden="true">SECURE SYSTEM</div>
-    <canvas id="binaryRain"></canvas>
-    <div class="login-container">
-    <canvas id="binaryRain"></canvas>
+    <!-- Sound Elements -->
+    <audio id="typingSound" src="https://assets.mixkit.co/sfx/preview/mixkit-keyboard-typing-1386.mp3"></audio>
+    <audio id="accessGranted" src="https://assets.mixkit.co/sfx/preview/mixkit-unlock-game-notification-253.mp3"></audio>
+    <audio id="accessDenied" src="https://assets.mixkit.co/sfx/preview/mixkit-arcade-game-explosion-2759.mp3"></audio>
+    <audio id="matrixSound" loop src="https://assets.mixkit.co/sfx/preview/mixkit-techno-horror-ambient-2283.mp3"></audio>
+    
+    <!-- Glitch Header -->
+    <div class="glitch" aria-hidden="true">المفات المهمة</div>
+    
+    <!-- Matrix Rain Canvas -->
+    <canvas id="matrixRain"></canvas>
+    
     <div class="login-container">
         <div class="terminal">
             <div class="terminal-header">
@@ -22,7 +30,7 @@
                 <div class="terminal-title">SECURE LOGIN</div>
             </div>
             <div class="terminal-body">
-                <div class="prompt">user@system:~$ login</div>
+                <div class="prompt">orignal.trk@system:~$ login</div>
                 <form id="loginForm">
                     <div class="input-group">
                         <label for="username">USERNAME:</label>
