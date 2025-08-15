@@ -3,103 +3,100 @@ document.addEventListener('DOMContentLoaded', function() {
     const typingSound = document.getElementById('typingSound');
     const accessGranted = document.getElementById('accessGranted');
     const accessDenied = document.getElementById('accessDenied');
-    const matrixSound = document.getElementById('matrixSound');
+    const birthdaySound = document.getElementById('birthdaySound');
     
-    // Matrix Rain Effect
-    const canvas = document.getElementById('matrixRain');
+    // Hearts Rain Effect
+    const canvas = document.getElementById('heartsRain');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     
-    const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
-    const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    const nums = '0123456789';
-    const alphabet = katakana + latin + nums;
+    // Birthday elements
+    const hearts = ['❤️', '🧡', '💛', '💚', '💙', '💜', '🤎', '🖤', '🤍', '💖', '💗', '💘', '💝', '🎂', '🎁', '🎉'];
+    const messages = ['Happy Birthday!', 'HBD!', 'Best Wishes!', 'Party Time!'];
     
-    const fontSize = 16;
+    const fontSize = 24;
     const columns = canvas.width / fontSize;
-    const rainDrops = [];
+    const drops = [];
     
     for (let x = 0; x < columns; x++) {
-        rainDrops[x] = 1;
+        drops[x] = Math.floor(Math.random() * canvas.height);
     }
     
-    // Play ambient matrix sound
-    matrixSound.volume = 0.2;
-    matrixSound.play();
+    // Play birthday music
+    birthdaySound.volume = 0.3;
+    birthdaySound.play();
     
     const draw = () => {
         ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         
-        ctx.fillStyle = '#0f0';
-        ctx.font = fontSize + 'px monospace';
+        ctx.fillStyle = '#ff0000';
+        ctx.font = fontSize + 'px Arial';
         
-        for (let i = 0; i < rainDrops.length; i++) {
-            const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
-            ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+        for (let i = 0; i < drops.length; i++) {
+            // Alternate between hearts and messages
+            const text = Math.random() > 0.7 
+                ? messages[Math.floor(Math.random() * messages.length)]
+                : hearts[Math.floor(Math.random() * hearts.length)];
             
-            if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                rainDrops[i] = 0;
+            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+            
+            if (drops[i] * fontSize > canvas.height || Math.random() > 0.95) {
+                drops[i] = 0;
             }
-            rainDrops[i]++;
+            drops[i]++;
         }
     };
     
-    setInterval(draw, 30);
+    setInterval(draw, 60);
     
-    // Login form handling
-    const loginForm = document.getElementById('loginForm');
+    // Birthday form handling
+    const birthdayForm = document.getElementById('birthdayForm');
     const statusMessage = document.getElementById('status');
-    const inputs = document.querySelectorAll('.terminal-input');
+    const birthdayMessage = document.getElementById('birthdayMessage');
+    const input = document.getElementById('birthdayCode');
     
-    // Add typing sounds to inputs
-    inputs.forEach(input => {
-        input.addEventListener('keydown', () => {
-            typingSound.currentTime = 0;
-            typingSound.volume = 0.3;
-            typingSound.play();
-        });
+    // Add typing sound to input
+    input.addEventListener('keydown', () => {
+        typingSound.currentTime = 0;
+        typingSound.volume = 0.2;
+        typingSound.play();
     });
     
-    loginForm.addEventListener('submit', function(e) {
+    birthdayForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
+        const code = input.value;
         
-        // Correct credentials
-        if (username === 'orignal.trk' && password === 'ZD412') {
-            statusMessage.textContent = "ACCESS GRANTED... WELCOME AGENT";
-            statusMessage.style.color = "#0f0";
-            statusMessage.classList.remove('blink');
+        // Change this to your desired code
+        if (code === 'ZD412') {
+            // Hide form and show message
+            birthdayForm.style.display = 'none';
+            statusMessage.style.display = 'none';
+            birthdayMessage.classList.remove('hidden');
             
             // Play success sound
             accessGranted.currentTime = 0;
             accessGranted.play();
             
-            // Intense glitch effect
-            document.body.style.animation = "glitch 0.1s infinite";
+            // Redirect after delay
             setTimeout(() => {
-                document.body.style.animation = "none";
-                // Redirect to "secured" page
-                window.location.href = "https://discord.gg/Lands"; // Change this URL
-            }, 2000);
-        } 
-        // Wrong credentials
-        else {
-            statusMessage.textContent = "ACCESS DENIED: INVALID CREDENTIALS";
-            statusMessage.style.color = "#f00";
-            statusMessage.classList.add('blink');
+                window.location.href = "https://discord.gg/Lands";
+            }, 3000);
+        } else {
+            statusMessage.textContent = "Incorrect code! Try again";
+            statusMessage.style.color = "#ff0000";
             
             // Play error sound
             accessDenied.currentTime = 0;
+            accessDenied.volume = 0.3;
             accessDenied.play();
             
-            // Error glitch effect
-            document.body.style.animation = "glitch 0.2s infinite";
+            // Shake animation
+            input.style.animation = "shake 0.5s";
             setTimeout(() => {
-                document.body.style.animation = "none";
-            }, 1000);
+                input.style.animation = "none";
+            }, 500);
         }
     });
     
@@ -107,5 +104,11 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('resize', function() {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
+    });
+    
+    // Touch screen support
+    document.addEventListener('touchstart', function() {
+        // Ensure audio plays on mobile
+        birthdaySound.play().catch(e => console.log("Audio play failed:", e));
     });
 });
