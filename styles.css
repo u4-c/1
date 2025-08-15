@@ -1,3 +1,4 @@
+/* Base Styles */
 body {
     margin: 0;
     padding: 0;
@@ -8,13 +9,16 @@ body {
     height: 100vh;
 }
 
-canvas {
+/* Matrix Rain */
+#matrixRain {
     position: fixed;
     top: 0;
     left: 0;
     z-index: 0;
+    opacity: 0.8;
 }
 
+/* Login Container */
 .login-container {
     position: relative;
     z-index: 1;
@@ -24,12 +28,18 @@ canvas {
     height: 100vh;
 }
 
+/* Terminal Styling */
 .terminal {
     width: 350px;
     background-color: rgba(0, 0, 0, 0.8);
     border: 1px solid #0f0;
     border-radius: 5px;
     box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+    transition: all 0.3s;
+}
+
+.terminal:hover {
+    animation: terminal-glitch 0.5s infinite;
 }
 
 .terminal-header {
@@ -130,10 +140,22 @@ canvas {
     animation: blink 1s infinite;
 }
 
+/* Animations */
 @keyframes blink {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
 }
+
+@keyframes terminal-glitch {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+    100% { transform: translate(0); }
+}
+
+/* Glitch Effects */
 .glitch {
     position: fixed;
     top: 20px;
