@@ -1,18 +1,12 @@
-/* Base Styles */
 body {
     margin: 0;
     padding: 0;
     background-color: #000;
-    color: white;
-    font-family: 'Arial', sans-serif;
+    font-family: Arial, sans-serif;
     overflow: hidden;
     height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
-/* Animation Canvas */
 canvas {
     position: fixed;
     top: 0;
@@ -20,116 +14,64 @@ canvas {
     width: 100%;
     height: 100%;
     z-index: 0;
-    pointer-events: none;
 }
 
-/* Transparent Center Box */
-.login-container {
+.center-container {
     position: relative;
     z-index: 1;
-    width: 90%;
-    max-width: 500px;
-    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-.rainbow-box {
-    background-color: transparent;
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
+.secret-box {
+    background-color: rgba(0, 0, 0, 0.5);
     border: 3px solid #ff69b4;
-    animation: border-pulse 3s infinite;
     border-radius: 15px;
     padding: 30px;
+    width: 300px;
     text-align: center;
-    box-shadow: 0 0 30px rgba(255, 105, 180, 0.3);
+    backdrop-filter: blur(5px);
 }
 
-@keyframes border-pulse {
-    0% { border-color: #ff69b4; }
-    33% { border-color: #1e90ff; }
-    66% { border-color: #87cefa; }
-    100% { border-color: #9370db; }
-}
-
-/* Rainbow Text */
 .rainbow-text {
+    font-size: 24px;
+    margin-bottom: 20px;
     background: linear-gradient(to right, #ff69b4, #1e90ff, #87cefa, #9370db);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    background-size: 300% 100%;
-    animation: gradient-flow 5s infinite alternate;
-    font-size: 2rem;
-    margin-bottom: 20px;
-    text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
 }
 
-@keyframes gradient-flow {
-    0% { background-position: 0% 50%; }
-    100% { background-position: 100% 50%; }
+.password-label {
+    color: #87cefa;
+    margin-bottom: 15px;
+    font-size: 18px;
 }
 
-/* Form Elements */
-.input-group {
-    margin: 20px 0;
-}
-
-.birthday-input {
-    width: 80%;
-    padding: 12px;
-    border: 2px solid #ff69b4;
-    background-color: rgba(255, 182, 193, 0.2);
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 2px solid #1e90ff;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
     color: white;
-    font-size: 1rem;
-    border-radius: 8px;
-    text-align: center;
-    outline: none;
 }
 
-.birthday-button {
-    width: 85%;
-    padding: 12px;
-    background: linear-gradient(to right, rgba(255, 105, 180, 0.7), rgba(30, 144, 255, 0.7));
-    color: white;
+button {
+    width: 100%;
+    padding: 10px;
+    background: linear-gradient(to right, #ff69b4, #1e90ff);
     border: none;
-    font-size: 1rem;
-    font-weight: bold;
-    border-radius: 8px;
+    border-radius: 5px;
+    color: white;
     cursor: pointer;
-    transition: all 0.3s;
 }
 
-/* Status Messages */
-.status-message {
-    margin: 15px 0;
+#statusMessage {
+    margin-top: 15px;
     min-height: 20px;
-    text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
-}
-
-.hidden {
-    display: none;
-}
-
-/* Animations */
-@keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    20% { transform: translateX(-10px); }
-    40% { transform: translateX(10px); }
-    60% { transform: translateX(-10px); }
-    80% { transform: translateX(10px); }
-}
-
-/* Mobile Styles */
-@media (max-width: 600px) {
-    .rainbow-text {
-        font-size: 1.5rem;
-    }
-    .birthday-input, .birthday-button {
-        width: 90%;
-        padding: 10px;
-    }
-    .rainbow-box {
-        padding: 20px;
-        backdrop-filter: blur(3px);
-    }
+    color: #ff69b4;
 }
