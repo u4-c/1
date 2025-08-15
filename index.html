@@ -3,41 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday</title>
+    <title>Secret Message</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Sound Elements -->
-    <audio id="typingSound" src="https://assets.mixkit.co/sfx/preview/mixkit-keyboard-typing-1386.mp3"></audio>
-    <audio id="accessGranted" src="https://assets.mixkit.co/sfx/preview/mixkit-unlock-game-notification-253.mp3"></audio>
-    <audio id="accessDenied" src="https://assets.mixkit.co/sfx/preview/mixkit-arcade-game-explosion-2759.mp3"></audio>
-    <audio id="birthdaySound" loop src="https://assets.mixkit.co/music/preview/mixkit-happy-birthday-to-you-528.mp3"></audio>
+    <!-- Birthday Rain Canvas -->
+    <canvas id="birthdayRain"></canvas>
     
-    <!-- Hearts Rain Canvas -->
-    <canvas id="heartsRain"></canvas>
-    
-    <div class="login-container">
-        <div class="birthday-card">
-            <div class="card-header">
-                <div class="card-title">Happy Birthday!</div>
-            </div>
-            <div class="card-body">
-                <div class="prompt">Enter the secret code:</div>
-                <form id="birthdayForm">
-                    <div class="input-group">
-                        <input type="password" id="birthdayCode" class="birthday-input" placeholder="Enter code">
-                    </div>
-                    <button type="submit" class="birthday-button">UNLOCK MESSAGE</button>
-                </form>
-                <div id="status" class="status-message"></div>
-                <div id="birthdayMessage" class="hidden">
-                    <h2>🎉 SURPRISE! 🎉</h2>
-                    <p>Wishing you an amazing birthday!</p>
-                    <p>Redirecting to celebration...</p>
-                </div>
+    <div class="container">
+        <div class="rainbow-box">
+            <h1 class="rainbow-text">SECRET MESSAGE</h1>
+            <form id="passwordForm">
+                <input type="password" id="passwordInput" placeholder="Enter Password">
+                <button type="submit">UNLOCK</button>
+            </form>
+            <div id="message" class="hidden">
+                <h2 class="rainbow-text">HAPPY BIRTHDAY!</h2>
+                <p>Redirecting to celebration...</p>
             </div>
         </div>
     </div>
+    
     <script src="script.js"></script>
 </body>
 </html>
