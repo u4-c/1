@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const hearts = ['❤️', '🧡','🎂', '🎁', '🎉'];
     const messages = ['Happy Birthday!'];
     
-    const fontSize = 24;
+    const fontSize = 14;
     const columns = canvas.width / fontSize;
     const drops = [];
     
