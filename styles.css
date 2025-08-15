@@ -116,3 +116,47 @@ canvas {
     60% { transform: translateX(-10px); }
     80% { transform: translateX(10px); }
 }
+
+/* Add these new styles to your existing CSS */
+
+.rainbow-box {
+    /* Pink border */
+    border: 3px solid #ff69b4;
+    animation: border-pulse 3s infinite;
+}
+
+@keyframes border-pulse {
+    0% { border-color: #ff69b4; } /* Pink */
+    33% { border-color: #87cefa; } /* Baby blue */
+    66% { border-color: #9370db; } /* Light purple */
+    100% { border-color: #ff69b4; } /* Back to pink */
+}
+
+.rainbow-text {
+    /* Custom gradient (pink, blue, baby blue, light purple) */
+    background: linear-gradient(to right, 
+        #ff69b4, /* Pink */
+        #1e90ff, /* Blue */
+        #87cefa, /* Baby blue */
+        #9370db  /* Light purple */
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    background-size: 300% 100%;
+    animation: gradient-flow 5s infinite alternate;
+}
+
+@keyframes gradient-flow {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+/* Make the input and button match the theme */
+.birthday-input {
+    border: 2px solid #ff69b4;
+}
+
+.birthday-button {
+    background: linear-gradient(to right, #ff69b4, #87cefa);
+}
