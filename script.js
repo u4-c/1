@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(() => {
                 document.body.style.animation = "none";
                 // Redirect to "secured" page
-                window.location.href = "https://github.com"; // Change this URL
+                window.location.href = "https://discord.gg/Lands"; // Change this URL
             }, 2000);
         } 
         // Wrong credentials
