@@ -1,48 +1,54 @@
 document.addEventListener('DOMContentLoaded', function() {
     const canvas = document.getElementById('birthdayRain');
     const ctx = canvas.getContext('2d');
+    
+    // Set canvas to full window size
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     
-    // The letters we want to rain in order
-    const message = "Happy Birthday";
-    let letterIndex = 0;
-    const letters = [];
+    // The message to display in order
+    const message = "HAPPY BIRTHDAY ";
+    const chars = message.split('');
     const fontSize = 20;
-    const columns = Math.floor(canvas.width / fontSize);
+    const columns = Math.floor(canvas.width / fontSize) + 1;
     
-    // Initialize drops
+    // Each column gets its own position and character index
     const drops = [];
     for (let i = 0; i < columns; i++) {
-        drops[i] = Math.random() * -100; // Start above the screen
+        drops[i] = {
+            y: Math.random() * -100, // Start above the screen
+            charIndex: i % chars.length // Cycle through message
+        };
     }
-    
+
     function draw() {
-        // Semi-transparent background for trailing effect
+        // Semi-transparent black background for trailing effect
         ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         
-        ctx.fillStyle = '#0f0';
+        ctx.fillStyle = '#0f0'; // Green text
         ctx.font = fontSize + 'px monospace';
         
-        // Draw the letters
         for (let i = 0; i < drops.length; i++) {
-            // Cycle through "Happy Birthday" letters
-            const text = message[letterIndex % message.length];
-            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+            // Get the current character for this column
+            const char = chars[drops[i].charIndex];
             
-            // Move the letter down
-            drops[i]++;
+            // Draw the character
+            ctx.fillText(char, i * fontSize, drops[i].y);
             
-            // Reset letter to top when it reaches bottom
-            if (drops[i] * fontSize > canvas.height && Math.random() > 0.95) {
-                drops[i] = 0;
-                letterIndex++;
+            // Move down
+            drops[i].y += fontSize;
+            
+            // Reset to top when reaching bottom with random delay
+            if (drops[i].y > canvas.height && Math.random() > 0.95) {
+                drops[i].y = 0;
+                // Move to next character in sequence
+                drops[i].charIndex = (drops[i].charIndex + 1) % chars.length;
             }
         }
     }
     
-    // Animation loop
+    // Animation loop (30 frames per second)
     setInterval(draw, 33);
     
     // Password form handling
