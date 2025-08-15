@@ -16,8 +16,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const drops = [];
     for (let i = 0; i < columns; i++) {
         drops[i] = {
-            y: Math.random() * -100, // Start above the screen
-            charIndex: i % chars.length // Cycle through message
+            y: Math.random() * -100,
+            charIndex: i % chars.length,
+            speed: 0.6 + Math.random() * 0.2 // Speed control (0.6x with slight variation)
         };
     }
 
@@ -26,30 +27,29 @@ document.addEventListener('DOMContentLoaded', function() {
         ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         
-        ctx.fillStyle = '#0f0'; // Green text
+        // Light pink with glow effect
+        ctx.shadowColor = '#ffb6c1'; // Light pink glow
+        ctx.shadowBlur = 15;
+        ctx.fillStyle = '#ffb6c1'; // Light pink text
         ctx.font = fontSize + 'px monospace';
         
         for (let i = 0; i < drops.length; i++) {
-            // Get the current character for this column
             const char = chars[drops[i].charIndex];
-            
-            // Draw the character
             ctx.fillText(char, i * fontSize, drops[i].y);
+            drops[i].y += drops[i].speed; // Use the custom speed
             
-            // Move down
-            drops[i].y += fontSize;
-            
-            // Reset to top when reaching bottom with random delay
             if (drops[i].y > canvas.height && Math.random() > 0.95) {
                 drops[i].y = 0;
-                // Move to next character in sequence
                 drops[i].charIndex = (drops[i].charIndex + 1) % chars.length;
             }
         }
+        
+        // Reset shadow for next frame
+        ctx.shadowColor = 'transparent';
     }
     
-    // Animation loop (30 frames per second)
-    setInterval(draw, 33);
+    // Slower animation loop (40ms = ~25fps for slower effect)
+    setInterval(draw, 40);
     
     // Password form handling
     const form = document.getElementById('passwordForm');
@@ -60,16 +60,12 @@ document.addEventListener('DOMContentLoaded', function() {
         e.preventDefault();
         
         if (passwordInput.value === 'ZD412') {
-            // Correct password
             form.style.display = 'none';
             messageDiv.classList.remove('hidden');
-            
-            // Redirect after 3 seconds
             setTimeout(() => {
                 window.location.href = "https://discord.gg/Lands";
             }, 3000);
         } else {
-            // Wrong password - shake effect
             passwordInput.style.animation = 'shake 0.5s';
             setTimeout(() => {
                 passwordInput.style.animation = '';
@@ -78,7 +74,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Handle window resize
     window.addEventListener('resize', function() {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
