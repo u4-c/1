@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Animation control
     let animationId;
-    const speedFactor = 0.6; // Your requested 0.6x speed
+    const speedFactor = 0.9; // Your requested 0.6x speed
     
     // Start animation
     startAnimation();
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
             drops[i] = {
                 y: Math.random() * -100,
                 charIndex: i % chars.length,
-                speed: (0.9 + Math.random() * 0.9) * speedFactor
+                speed: (0.5 + Math.random() * 0.5) * speedFactor
             };
         }
     }
