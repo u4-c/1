@@ -1,139 +1,55 @@
+/* Base Styles */
 body {
     margin: 0;
     padding: 0;
     background-color: #000;
+    color: white;
+    font-family: 'Arial', sans-serif;
+    overflow: hidden;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    overflow: hidden;
-    font-family: 'Arial', sans-serif;
 }
 
-canvas {
+/* Hearts Rain Canvas */
+#heartsRain {
     position: fixed;
     top: 0;
     left: 0;
     z-index: 0;
+    opacity: 0.8;
 }
 
-.container {
+/* Container Styles */
+.login-container {
     position: relative;
     z-index: 1;
-    width: 100%;
-    max-width: 600px;
+    width: 90%;
+    max-width: 500px;
     padding: 20px;
 }
 
+/* Rainbow Box (Main Card) */
 .rainbow-box {
-    background: rgba(0, 0, 0, 0.7);
+    border: 3px solid #ff69b4; /* Pink border */
+    animation: border-pulse 3s infinite;
+    background-color: rgba(0, 0, 0, 0.7);
     border-radius: 15px;
     padding: 30px;
     text-align: center;
-    box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
-    border: 2px solid transparent;
-    animation: borderGlow 3s infinite alternate;
-}
-
-@keyframes borderGlow {
-    0% { border-color: rgba(255, 0, 0, 0.7); }
-    16% { border-color: rgba(255, 165, 0, 0.7); }
-    33% { border-color: rgba(255, 255, 0, 0.7); }
-    50% { border-color: rgba(0, 255, 0, 0.7); }
-    66% { border-color: rgba(0, 0, 255, 0.7); }
-    83% { border-color: rgba(75, 0, 130, 0.7); }
-    100% { border-color: rgba(238, 130, 238, 0.7); }
-}
-
-.rainbow-text {
-    background: linear-gradient(to right, 
-        red, orange, yellow, green, blue, indigo, violet);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    font-size: 2.5rem;
-    margin-bottom: 30px;
-}
-
-input {
-    width: 80%;
-    padding: 15px;
-    margin: 10px 0;
-    font-size: 1.2rem;
-    border: none;
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.9);
-    text-align: center;
-}
-
-button {
-    background: linear-gradient(to right, red, violet);
-    color: white;
-    border: none;
-    padding: 15px 30px;
-    font-size: 1.2rem;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s;
-    margin-top: 15px;
-}
-
-button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
-}
-
-.hidden {
-    display: none;
-}
-
-#message {
-    margin-top: 20px;
-}
-
-@media (max-width: 600px) {
-    .rainbow-text {
-        font-size: 1.8rem;
-    }
-    
-    input {
-        width: 90%;
-        padding: 12px;
-    }
-    
-    button {
-        padding: 12px 25px;
-    }
-}
-canvas {
-    filter: drop-shadow(0 0 10px #ff69b4);
-}
-
-@keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    20% { transform: translateX(-10px); }
-    40% { transform: translateX(10px); }
-    60% { transform: translateX(-10px); }
-    80% { transform: translateX(10px); }
-}
-
-/* Add these new styles to your existing CSS */
-
-.rainbow-box {
-    /* Pink border */
-    border: 3px solid #ff69b4;
-    animation: border-pulse 3s infinite;
+    box-shadow: 0 0 30px rgba(255, 105, 180, 0.3);
 }
 
 @keyframes border-pulse {
     0% { border-color: #ff69b4; } /* Pink */
-    33% { border-color: #87cefa; } /* Baby blue */
-    66% { border-color: #9370db; } /* Light purple */
-    100% { border-color: #ff69b4; } /* Back to pink */
+    33% { border-color: #1e90ff; } /* Blue */
+    66% { border-color: #87cefa; } /* Baby blue */
+    100% { border-color: #9370db; } /* Light purple */
 }
 
+/* Rainbow Text Gradient */
 .rainbow-text {
-    /* Custom gradient (pink, blue, baby blue, light purple) */
     background: linear-gradient(to right, 
         #ff69b4, /* Pink */
         #1e90ff, /* Blue */
@@ -145,6 +61,8 @@ canvas {
     color: transparent;
     background-size: 300% 100%;
     animation: gradient-flow 5s infinite alternate;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
 }
 
 @keyframes gradient-flow {
@@ -152,11 +70,77 @@ canvas {
     100% { background-position: 100% 50%; }
 }
 
-/* Make the input and button match the theme */
+/* Form Elements */
+.input-group {
+    margin: 20px 0;
+}
+
 .birthday-input {
+    width: 80%;
+    padding: 15px;
     border: 2px solid #ff69b4;
+    background-color: rgba(255, 105, 180, 0.1);
+    color: white;
+    font-size: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    outline: none;
+}
+
+.birthday-input:focus {
+    box-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
 }
 
 .birthday-button {
-    background: linear-gradient(to right, #ff69b4, #87cefa);
+    width: 85%;
+    padding: 15px;
+    background: linear-gradient(to right, #ff69b4, #1e90ff);
+    color: white;
+    border: none;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.birthday-button:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 15px rgba(255, 105, 180, 0.5);
+}
+
+/* Status Messages */
+.status-message {
+    margin: 15px 0;
+    min-height: 20px;
+    font-size: 1rem;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Shake Animation */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-10px); }
+    40% { transform: translateX(10px); }
+    60% { transform: translateX(-10px); }
+    80% { transform: translateX(10px); }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+    .rainbow-text {
+        font-size: 1.8rem;
+    }
+    
+    .birthday-input, .birthday-button {
+        width: 90%;
+        padding: 12px;
+    }
+    
+    .rainbow-box {
+        padding: 20px;
+    }
 }
