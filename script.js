@@ -1,51 +1,76 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Audio elements
     const typingSound = document.getElementById('typingSound');
     const accessGranted = document.getElementById('accessGranted');
     const accessDenied = document.getElementById('accessDenied');
     const birthdaySound = document.getElementById('birthdaySound');
     
+    // Canvas setup
     const canvas = document.getElementById('heartsRain');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     
-    const hearts = ['❤️', '🧡','🎂', '🎁', '🎉'];
-    const messages = ['Happy', ' Birthday!'];
+    // Characters to rain (individual letters)
+    const letters = "HAPPYBIRTHDAY".split('');
     
-    const fontSize = 7;
+    // Flower emojis
+    const flowers = ['🌸', '🌺', '🌻', '🌹', '🌷', '💐', '🏵️'];
+    
+    // Smaller font size (changed from 24 to 16)
+    const fontSize = 16;
     const columns = canvas.width / fontSize;
     const drops = [];
     
-    for (let x = 0; x < columns; x++) {
-        drops[x] = Math.floor(Math.random() * canvas.height);
+    // Initialize drops
+    for (let i = 0; i < columns; i++) {
+        drops[i] = {
+            y: Math.random() * -100,
+            char: Math.random() > 0.3 
+                ? letters[Math.floor(Math.random() * letters.length)]
+                : flowers[Math.floor(Math.random() * flowers.length)],
+            speed: 1 + Math.random() * 2 // Random speed between 1-3
+        };
     }
     
+    // Play birthday music
     birthdaySound.volume = 0.3;
     birthdaySound.play();
     
-    const draw = () => {
+    // Drawing function
+    function draw() {
+        // Clear with fade effect
         ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         
-        ctx.fillStyle = '#ff0000';
+        // Set pink color with glow
+        ctx.fillStyle = '#ffb6c1';
         ctx.font = fontSize + 'px Arial';
+        ctx.shadowColor = '#ff69b4';
+        ctx.shadowBlur = 5;
         
+        // Draw each character
         for (let i = 0; i < drops.length; i++) {
-            const text = Math.random() > 0.7 
-                ? messages[Math.floor(Math.random() * messages.length)]
-                : hearts[Math.floor(Math.random() * hearts.length)];
+            const char = drops[i].char;
+            ctx.fillText(char, i * fontSize, drops[i].y);
             
-            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+            // Move down
+            drops[i].y += drops[i].speed;
             
-            if (drops[i] * fontSize > canvas.height || Math.random() > 0.95) {
-                drops[i] = 0;
+            // Reset when off screen
+            if (drops[i].y > canvas.height) {
+                drops[i].y = 0;
+                drops[i].char = Math.random() > 0.3 
+                    ? letters[Math.floor(Math.random() * letters.length)]
+                    : flowers[Math.floor(Math.random() * flowers.length)];
             }
-            drops[i]++;
         }
-    };
+    }
     
-    setInterval(draw, 60);
+    // Animation loop (60fps)
+    setInterval(draw, 1000/60);
     
+    // Form handling (keep your existing code)
     const birthdayForm = document.getElementById('birthdayForm');
     const statusMessage = document.getElementById('status');
     const birthdayMessage = document.getElementById('birthdayMessage');
@@ -84,15 +109,13 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(() => {
                 input.style.animation = "none";
             }, 500);
+            input.value = '';
         }
     });
     
+    // Handle window resize
     window.addEventListener('resize', function() {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-    });
-    
-    document.addEventListener('touchstart', function() {
-        birthdaySound.play().catch(e => console.log("Audio play failed:", e));
     });
 });
