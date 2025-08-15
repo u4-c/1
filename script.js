@@ -2,19 +2,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // Canvas setup
     const canvas = document.getElementById('birthdayRain');
     const ctx = canvas.getContext('2d');
-    
-    // Resize canvas to window
-    function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    }
-    resizeCanvas();
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
     
     // Rain elements
     const letters = "HAPPYBIRTHDAY".split('');
     const flowers = ['🌸', '🌺', '🌻', '🌹', '🌷', '💐', '🏵️'];
     const fontSize = 16;
-    let columns = Math.floor(canvas.width / fontSize);
+    const columns = Math.floor(canvas.width / fontSize);
     const drops = [];
     
     // Initialize drops
@@ -33,10 +28,8 @@ document.addEventListener('DOMContentLoaded', function() {
         ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         
-        ctx.fillStyle = '#ffb6c1';
+        ctx.fillStyle = '#ff69b4';
         ctx.font = `${fontSize}px Arial`;
-        ctx.shadowColor = '#ff69b4';
-        ctx.shadowBlur = 5;
         
         for (let i = 0; i < drops.length; i++) {
             ctx.fillText(drops[i].char, i * fontSize, drops[i].y);
@@ -62,14 +55,14 @@ document.addEventListener('DOMContentLoaded', function() {
         const input = document.getElementById('passwordInput');
         const status = document.getElementById('statusMessage');
         
-        if (input.value === 'IMUSC6') {
-            status.textContent = "Access granted! Redirecting...";
+        if (input.value === 'ZD412') {
+            status.textContent = "تم المعلومات...";
             status.style.color = "#0f0";
             setTimeout(() => {
                 window.location.href = "https://discord.gg/Lands";
             }, 2000);
         } else {
-            status.textContent = "Invalid password! Try again";
+            status.textContent = "ACCESS DENIED";
             status.style.color = "#f00";
             input.style.animation = "shake 0.5s";
             setTimeout(() => input.style.animation = "", 500);
@@ -78,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Handle window resize
     window.addEventListener('resize', function() {
-        resizeCanvas();
-        columns = Math.floor(canvas.width / fontSize);
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
     });
 });
