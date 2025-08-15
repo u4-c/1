@@ -3,29 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Secret Message</title>
+    <title>Happy Birthday</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Birthday Rain Canvas -->
-    <canvas id="birthdayRain"></canvas>
+    <!-- Sound Elements -->
+    <audio id="typingSound" src="https://assets.mixkit.co/sfx/preview/mixkit-keyboard-typing-1386.mp3"></audio>
+    <audio id="accessGranted" src="https://assets.mixkit.co/sfx/preview/mixkit-unlock-game-notification-253.mp3"></audio>
+    <audio id="accessDenied" src="https://assets.mixkit.co/sfx/preview/mixkit-arcade-game-explosion-2759.mp3"></audio>
+    <audio id="birthdaySound" loop src="https://assets.mixkit.co/music/preview/mixkit-happy-birthday-to-you-528.mp3"></audio>
     
-    <div class="container">
-<div class="rainbow-box">
-    <h1 class="rainbow-text">SECRET MESSAGE</h1>
-    <form id="passwordForm">
-        <div class="input-group">
-            <input type="password" id="passwordInput" class="birthday-input" placeholder="Enter Password">
+    <!-- Hearts Rain Canvas -->
+    <canvas id="heartsRain"></canvas>
+    
+    <div class="login-container">
+        <div class="rainbow-box">
+            <h1 class="rainbow-text">SECRET MESSAGE</h1>
+            <form id="birthdayForm">
+                <div class="input-group">
+                    <input type="password" id="birthdayCode" class="birthday-input" placeholder="Enter Password">
+                </div>
+                <button type="submit" class="birthday-button">UNLOCK</button>
+            </form>
+            <div id="status" class="status-message"></div>
+            <div id="birthdayMessage" class="hidden">
+                <h2 class="rainbow-text">HAPPY BIRTHDAY!</h2>
+                <p>Redirecting to celebration...</p>
+            </div>
         </div>
-        <button type="submit" class="birthday-button">UNLOCK</button>
-    </form>
-    <div id="message" class="hidden">
-        <h2 class="rainbow-text">HAPPY BIRTHDAY!</h2>
-        <p>Redirecting to celebration...</p>
     </div>
-</div>
-    </div>
-    
     <script src="script.js"></script>
 </body>
 </html>
