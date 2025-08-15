@@ -10,9 +10,9 @@ document.addEventListener('DOMContentLoaded', function() {
     canvas.height = window.innerHeight;
     
     const hearts = ['❤️', '🧡','🎂', '🎁', '🎉'];
-    const messages = ['Happy Birthday!'];
+    const messages = ['Happy', ' Birthday!'];
     
-    const fontSize = 14;
+    const fontSize = 7;
     const columns = canvas.width / fontSize;
     const drops = [];
     
