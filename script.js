@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
         
-        if (username === 'KHALID' && password === 'ZD412') {
+        if (username === 'original.trk' && password === 'ZD412') {
             statusMessage.textContent = "ACCESS GRANTED... WELCOME AGENT";
             statusMessage.style.color = "#0f0";
             statusMessage.classList.remove('blink');
