@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Secure Login</title>
+    <title>Happy Birthday</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -11,38 +11,30 @@
     <audio id="typingSound" src="https://assets.mixkit.co/sfx/preview/mixkit-keyboard-typing-1386.mp3"></audio>
     <audio id="accessGranted" src="https://assets.mixkit.co/sfx/preview/mixkit-unlock-game-notification-253.mp3"></audio>
     <audio id="accessDenied" src="https://assets.mixkit.co/sfx/preview/mixkit-arcade-game-explosion-2759.mp3"></audio>
-    <audio id="matrixSound" loop src="https://assets.mixkit.co/sfx/preview/mixkit-techno-horror-ambient-2283.mp3"></audio>
+    <audio id="birthdaySound" loop src="https://assets.mixkit.co/music/preview/mixkit-happy-birthday-to-you-528.mp3"></audio>
     
-    <!-- Glitch Header -->
-    <div class="glitch" aria-hidden="true">SECURE SYSTEM</div>
-    
-    <!-- Matrix Rain Canvas -->
-    <canvas id="matrixRain"></canvas>
+    <!-- Hearts Rain Canvas -->
+    <canvas id="heartsRain"></canvas>
     
     <div class="login-container">
-        <div class="terminal">
-            <div class="terminal-header">
-                <div class="header-buttons">
-                    <span class="red"></span>
-                    <span class="yellow"></span>
-                    <span class="green"></span>
-                </div>
-                <div class="terminal-title">SECURE LOGIN</div>
+        <div class="birthday-card">
+            <div class="card-header">
+                <div class="card-title">Happy Birthday!</div>
             </div>
-            <div class="terminal-body">
-                <div class="prompt">orignal.trk@system:~$ login</div>
-                <form id="loginForm">
+            <div class="card-body">
+                <div class="prompt">Enter the secret code:</div>
+                <form id="birthdayForm">
                     <div class="input-group">
-                        <label for="username">USERNAME:</label>
-                        <input type="text" id="username" name="username" class="terminal-input">
+                        <input type="password" id="birthdayCode" class="birthday-input" placeholder="Enter code">
                     </div>
-                    <div class="input-group">
-                        <label for="password">PASSWORD:</label>
-                        <input type="password" id="password" name="password" class="terminal-input">
-                    </div>
-                    <button type="submit" class="terminal-button">ACCESS SYSTEM</button>
+                    <button type="submit" class="birthday-button">UNLOCK MESSAGE</button>
                 </form>
                 <div id="status" class="status-message"></div>
+                <div id="birthdayMessage" class="hidden">
+                    <h2>🎉 SURPRISE! 🎉</h2>
+                    <p>Wishing you an amazing birthday!</p>
+                    <p>Redirecting to celebration...</p>
+                </div>
             </div>
         </div>
     </div>
