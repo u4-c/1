@@ -1,123 +1,98 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Canvas setup
-    const canvas = document.getElementById('birthdayRain');
+    const typingSound = document.getElementById('typingSound');
+    const accessGranted = document.getElementById('accessGranted');
+    const accessDenied = document.getElementById('accessDenied');
+    const birthdaySound = document.getElementById('birthdaySound');
+    
+    const canvas = document.getElementById('heartsRain');
     const ctx = canvas.getContext('2d');
-    resizeCanvas();
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
     
-    // Rain configuration
-    const message = "HAPPY BIRTHDAY ";
-    const chars = message.split('');
-    const fontSize = 20;
-    let columns = Math.floor(canvas.width / fontSize) + 1;
+    const hearts = ['❤️', '🧡', '💛', '💚', '💙', '💜', '🤎', '🖤', '🤍', '💖', '💗', '💘', '💝', '🎂', '🎁', '🎉'];
+    const messages = ['Happy Birthday!', 'HBD!', 'Best Wishes!', 'Party Time!'];
     
-    // Drops array with individual speeds
+    const fontSize = 24;
+    const columns = canvas.width / fontSize;
     const drops = [];
-    initializeDrops();
     
-    // Animation control
-    let animationId;
-    const speedFactor = 0.9; // Your requested 0.6x speed
-    
-    // Start animation
-    startAnimation();
-    
-    // Form handling
-    const form = document.getElementById('passwordForm');
-    const passwordInput = document.getElementById('passwordInput');
-    const messageDiv = document.getElementById('message');
-    
-    form.addEventListener('submit', handleSubmit);
-    window.addEventListener('resize', handleResize);
-    
-    // Functions
-    function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        columns = Math.floor(canvas.width / fontSize) + 1;
+    for (let x = 0; x < columns; x++) {
+        drops[x] = Math.floor(Math.random() * canvas.height);
     }
     
-    function initializeDrops() {
-        for (let i = 0; i < columns; i++) {
-            drops[i] = {
-                y: Math.random() * -100,
-                charIndex: i % chars.length,
-                speed: (0.5 + Math.random() * 0.5) * speedFactor
-            };
-        }
-    }
+    birthdaySound.volume = 0.3;
+    birthdaySound.play();
     
-    function draw() {
-        // Clear with fade effect
+    const draw = () => {
         ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         
-        // Set pink text with glow
-        ctx.shadowColor = '#ffb6c1';
-        ctx.shadowBlur = 15;
-        ctx.fillStyle = '#ffb6c1';
-        ctx.font = `${fontSize}px monospace`;
+        ctx.fillStyle = '#ff0000';
+        ctx.font = fontSize + 'px Arial';
         
-        // Draw each character
         for (let i = 0; i < drops.length; i++) {
-            const char = chars[drops[i].charIndex];
-            ctx.fillText(char, i * fontSize, drops[i].y);
+            const text = Math.random() > 0.7 
+                ? messages[Math.floor(Math.random() * messages.length)]
+                : hearts[Math.floor(Math.random() * hearts.length)];
             
-            // Move at custom speed
-            drops[i].y += drops[i].speed;
+            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
             
-            // Reset when off screen
-            if (drops[i].y > canvas.height && Math.random() > 0.95) {
-                drops[i].y = 0;
-                drops[i].charIndex = (drops[i].charIndex + 1) % chars.length;
+            if (drops[i] * fontSize > canvas.height || Math.random() > 0.95) {
+                drops[i] = 0;
             }
+            drops[i]++;
         }
-        
-        // Reset shadow
-        ctx.shadowColor = 'transparent';
-        
-        // Continue animation
-        animationId = requestAnimationFrame(draw);
-    }
+    };
     
-    function startAnimation() {
-        if (!animationId) {
-            draw();
-        }
-    }
+    setInterval(draw, 60);
     
-    function stopAnimation() {
-        if (animationId) {
-            cancelAnimationFrame(animationId);
-            animationId = null;
-        }
-    }
+    const birthdayForm = document.getElementById('birthdayForm');
+    const statusMessage = document.getElementById('status');
+    const birthdayMessage = document.getElementById('birthdayMessage');
+    const input = document.getElementById('birthdayCode');
+
+    input.addEventListener('keydown', () => {
+        typingSound.currentTime = 0;
+        typingSound.volume = 0.2;
+        typingSound.play();
+    });
     
-    function handleSubmit(e) {
+    birthdayForm.addEventListener('submit', function(e) {
         e.preventDefault();
+        const code = input.value;
         
-        if (passwordInput.value === 'ZD412') {
-            // Success
-            form.style.display = 'none';
-            messageDiv.classList.remove('hidden');
+        if (code === 'BIRTHDAY') {
+            birthdayForm.style.display = 'none';
+            statusMessage.style.display = 'none';
+            birthdayMessage.classList.remove('hidden');
             
-            // Redirect after delay
+            accessGranted.currentTime = 0;
+            accessGranted.play();
+            
             setTimeout(() => {
                 window.location.href = "https://discord.gg/Lands";
             }, 3000);
         } else {
-            // Error effect
-            passwordInput.style.animation = 'shake 0.5s';
+            statusMessage.textContent = "Incorrect code! Try again";
+            statusMessage.style.color = "#ff0000";
+            
+            accessDenied.currentTime = 0;
+            accessDenied.volume = 0.3;
+            accessDenied.play();
+            
+            input.style.animation = "shake 0.5s";
             setTimeout(() => {
-                passwordInput.style.animation = '';
+                input.style.animation = "none";
             }, 500);
-            passwordInput.value = '';
         }
-    }
+    });
     
-    function handleResize() {
-        stopAnimation();
-        resizeCanvas();
-        initializeDrops();
-        startAnimation();
-    }
+    window.addEventListener('resize', function() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    });
+    
+    document.addEventListener('touchstart', function() {
+        birthdaySound.play().catch(e => console.log("Audio play failed:", e));
+    });
 });
