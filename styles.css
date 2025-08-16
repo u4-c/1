@@ -19,40 +19,25 @@ canvas {
     z-index: 0;
 }
 
-.login-box {
+.login-container {
     position: relative;
     z-index: 1;
-    width: 300px;
-    padding: 30px;
-    background: rgba(0, 0, 0, 0.7);
-    border: 1px solid #ff69b4;
-    border-radius: 5px;
-    text-align: center;
-}
-
-.title {
-    color: #ff69b4;
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
-.password-label {
-    color: #aaa;
-    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 200px;
 }
 
 #passwordInput {
-    width: 100%;
     padding: 10px;
-    margin-bottom: 15px;
     background: rgba(255, 255, 255, 0.1);
-    border: 1px solid #ff69b4;
+    border: none;
     color: white;
     text-align: center;
+    outline: none;
 }
 
 #submitBtn {
-    width: 100%;
     padding: 10px;
     background: #ff69b4;
     color: white;
@@ -61,14 +46,8 @@ canvas {
 }
 
 #statusMessage {
-    margin-top: 15px;
+    color: #ff69b4;
+    text-align: center;
     min-height: 20px;
-}
-
-@keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    20% { transform: translateX(-5px); }
-    40% { transform: translateX(5px); }
-    60% { transform: translateX(-5px); }
-    80% { transform: translateX(5px); }
+    font-size: 14px;
 }
