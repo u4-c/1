@@ -4,17 +4,11 @@ document.addEventListener('DOMContentLoaded', function() {
     bgMusic.volume = 0.3;
     successSound.volume = 0.7;
 
-    document.addEventListener('DOMContentLoaded', function() {
-    const bgMusic = document.getElementById('bgMusic');
-    const successSound = document.getElementById('successSound');
-    bgMusic.volume = 0.3;
-    successSound.volume = 0.7;
+    document.addEventListener('click', function initAudio() {
+        bgMusic.play().catch(e => console.log("Audio error:", e));
+        document.removeEventListener('click', initAudio);
+    });
 
-    document.addEventListener('click', function() {
-      bgMusic.play().catch(e => console.log("Audio play failed:", e));
-    }, { once: true });
-
-        
     const canvas = document.getElementById('birthdayRain');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
@@ -67,23 +61,21 @@ document.addEventListener('DOMContentLoaded', function() {
         const input = document.getElementById('passwordInput');
         const status = document.getElementById('statusMessage');
         
-    if (input.value === 'ZD412') {
-        status.textContent = "Access granted! Redirecting...";
-        status.style.color = "#ff69b4";
-        successSound.play(); 
-        setTimeout(() => {
-            window.location.href = "https://discord.gg/Lands";
-        }, 2000);
-    }
+        if (input.value === 'ZD412') {
+            status.textContent = "Access granted! Redirecting...";
+            status.style.color = "#0f0";
+            successSound.play();
+            setTimeout(() => {
+                window.location.href = "https://discord.gg/Lands";
+            }, 2000);
         } else {
             status.textContent = "Invalid password! Try again";
-            status.style.color = "#ff0000";
+            status.style.color = "#f00";
             input.style.animation = "shake 0.5s";
             setTimeout(() => input.style.animation = "", 500);
         }
     });
     
-    // Handle window resize
     window.addEventListener('resize', function() {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
