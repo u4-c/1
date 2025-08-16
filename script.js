@@ -1,18 +1,31 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Canvas setup
+    const bgMusic = document.getElementById('bgMusic');
+    const successSound = document.getElementById('successSound');
+    bgMusic.volume = 0.3;
+    successSound.volume = 0.7;
+
+    document.addEventListener('DOMContentLoaded', function() {
+    const bgMusic = document.getElementById('bgMusic');
+    const successSound = document.getElementById('successSound');
+    bgMusic.volume = 0.3;
+    successSound.volume = 0.7;
+
+    document.addEventListener('click', function() {
+      bgMusic.play().catch(e => console.log("Audio play failed:", e));
+    }, { once: true });
+
+        
     const canvas = document.getElementById('birthdayRain');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     
-    // Rain elements
     const letters = "ッ".split('');
     const flowers = ['🌹', '🌷', '💮', '🪷', '🏵️', '🌺', '🥀', '🌼', '🌸'];
     const fontSize = 16;
     const columns = Math.floor(canvas.width / fontSize);
     const drops = [];
     
-    // Initialize drops
     for (let i = 0; i < columns; i++) {
         drops[i] = {
             y: Math.random() * -100,
@@ -23,7 +36,6 @@ document.addEventListener('DOMContentLoaded', function() {
         };
     }
     
-    // Animation loop
     function animate() {
         ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -48,21 +60,21 @@ document.addEventListener('DOMContentLoaded', function() {
         requestAnimationFrame(animate);
     }
     
-    // Start animation
     animate();
     
-    // Password form
-    document.getElementById('passwordForm').addEventListener('submit', function(e) {
+    document.getElementById('submitBtn').addEventListener('click', function(e) {
         e.preventDefault();
         const input = document.getElementById('passwordInput');
         const status = document.getElementById('statusMessage');
         
-        if (input.value === 'ZD412') {
-            status.textContent = "Access granted! Redirecting...";
-            status.style.color = "#ff69b4";
-            setTimeout(() => {
-                window.location.href = "https://discord.gg/Lands";
-            }, 2000);
+    if (input.value === 'ZD412') {
+        status.textContent = "Access granted! Redirecting...";
+        status.style.color = "#ff69b4";
+        successSound.play(); 
+        setTimeout(() => {
+            window.location.href = "https://discord.gg/Lands";
+        }, 2000);
+    }
         } else {
             status.textContent = "Invalid password! Try again";
             status.style.color = "#ff0000";
