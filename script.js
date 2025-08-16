@@ -6,8 +6,8 @@ document.addEventListener('DOMContentLoaded', function() {
     canvas.height = window.innerHeight;
     
     // Rain elements
-    const letters = "HAPPYBIRTHDAY".split('');
-    const flowers = ['🌸', '🌺', '🌻', '🌹', '🌷', '💐', '🏵️'];
+    const letters = "ッ".split('');
+    const flowers = ['🌹', '🌷', '💮', '🪷', '🏵️', '🌺', '🥀', '🌼', '🌸'];
     const fontSize = 16;
     const columns = Math.floor(canvas.width / fontSize);
     const drops = [];
