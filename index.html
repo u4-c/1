@@ -1,17 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الملفات المهمة</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="pink-glow"></div>
     <canvas id="birthdayRain"></canvas>
-
-    <div class="login-container">
-        <form id="passwordForm">
-            <input type="password" id="passwordInput" placeholder="Enter Password">
-            <button type="submit">UNLOCK</button>
-        </form>
+    
     <div class="login-box">
         <div class="title">الملفات المهمة</div>
         <div class="password-label">Color Password</div>
@@ -19,6 +16,16 @@
         <button id="submitBtn">UNLOCK</button>
         <div id="statusMessage"></div>
     </div>
+
+    <!-- Audio Elements - Updated for local files -->
+    <audio id="bgMusic" loop>
+      <source src="sounds/background.mp3" type="audio/mpeg">
+      <source src="sounds/background.ogg" type="audio/ogg">
+    </audio>
+    <audio id="successSound">
+      <source src="sounds/success.mp3" type="audio/mpeg">
+      <source src="sounds/success.ogg" type="audio/ogg">
+    </audio>
 
     <script src="script.js"></script>
 </body>
