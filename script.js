@@ -30,6 +30,8 @@ document.addEventListener('DOMContentLoaded', function() {
         
         ctx.fillStyle = '#ff69b4';
         ctx.font = `${fontSize}px Arial`;
+        ctx.shadowColor = '#ff69b4';
+        ctx.shadowBlur = 5;
         
         for (let i = 0; i < drops.length; i++) {
             ctx.fillText(drops[i].char, i * fontSize, drops[i].y);
@@ -56,14 +58,14 @@ document.addEventListener('DOMContentLoaded', function() {
         const status = document.getElementById('statusMessage');
         
         if (input.value === 'ZD412') {
-            status.textContent = "تم المعلومات...";
-            status.style.color = "#0f0";
+            status.textContent = "Access granted! Redirecting...";
+            status.style.color = "#ff69b4";
             setTimeout(() => {
                 window.location.href = "https://discord.gg/Lands";
             }, 2000);
         } else {
-            status.textContent = "ACCESS DENIED";
-            status.style.color = "#f00";
+            status.textContent = "Invalid password! Try again";
+            status.style.color = "#ff0000";
             input.style.animation = "shake 0.5s";
             setTimeout(() => input.style.animation = "", 500);
         }
