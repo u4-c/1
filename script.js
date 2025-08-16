@@ -43,31 +43,27 @@ document.addEventListener('DOMContentLoaded', function() {
         };
     }
     
-    // Animation loop (unchanged)
-    function animate() {
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
+   function animate() {
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    ctx.fillStyle = '#ff69b4';
+    ctx.font = `${fontSize}px Arial`;
+    ctx.shadowColor = '#ff69b4';
+    ctx.shadowBlur = 5;
+    
+    for (let i = 0; i < drops.length; i++) {
+        ctx.fillText(drops[i].char, i * fontSize, drops[i].y);
+        drops[i].y += drops[i].speed;
         
-        ctx.fillStyle = '#ff69b4';
-        ctx.font = `${fontSize}px Arial`;
-        ctx.shadowColor = '#ff69b4';
-        ctx.shadowBlur = 5;
-        
-        for (let i = 0; i < drops.length; i++) {
-            ctx.fillText(drops[i].char, i * fontSize, drops[i].y);
-            drops[i].y += drops[i].speed;
-            
-            if (drops[i].y > canvas.height) {
-                drops[i].y = 0;
-                drops[i].char = Math.random() > 0.3 ? 
-                    letters[Math.floor(Math.random() * letters.length)] : 
-                    flowers[Math.floor(Math.random() * flowers.length)];
-            }
+        if (drops[i].y > canvas.height) {
+            drops[i].y = 0;
+            drops[i].char = currentChars[Math.floor(Math.random() * currentChars.length)];
         }
-        
-        requestAnimationFrame(animate);
     }
     
+    requestAnimationFrame(animate);
+}
     animate();
     
     function showSingleImage() {
@@ -84,10 +80,21 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function startGallery() {
-        loginContainer.style.display = 'none';
-        galleryContainer.style.display = 'flex';
-        showSingleImage(); // Just show the single image once
-    }
+    loginContainer.style.display = 'none';
+    galleryContainer.style.display = 'flex';
+    showSingleImage();
+
+        currentChars = [middleFinger];
+
+    const spotifyEmbed = document.getElementById('spotifyEmbed');
+    spotifyEmbed.innerHTML = `
+    <iframe data-testid="embed-iframe" style="border-radius:12px" 
+    src="https://open.spotify.com/embed/track/6y6jbcPG4Yn3Du4moXaenr?utm_source=generator" 
+    width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; 
+    encrypted-media; fullscreen; picture-in-picture" loading="lazy">
+    </iframe>
+    `;
+}
     
     document.getElementById('passwordForm').addEventListener('submit', function(e) {
         e.preventDefault();
