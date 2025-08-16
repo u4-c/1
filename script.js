@@ -5,15 +5,9 @@ document.addEventListener('DOMContentLoaded', function() {
     bgMusic.volume = 0.3;
     successSound.volume = 0.7;
 
-    // Gallery variables
-    const imagePaths = Array.from({length: 16}, (_, i) => `img/image${i+1}.jpg`);
-    const imageTexts = [
-        "Text for image 1", "Text for image 2", "Text for image 3", "Text for image 4",
-        "Text for image 5", "Text for image 6", "Text for image 7", "Text for image 8",
-        "Text for image 9", "Text for image 10", "Text for image 11", "Text for image 12",
-        "Text for image 13", "Text for image 14", "Text for image 15", "Text for image 16"
-    ];
-    let currentIndex = 0;
+    const singleImagePath = 'img/T1.png';
+    const singleImageText = "حبيت اقول لك روح انتحر مصدق انه في هدية لك ما في الا هاذي الصورة تكفي و توفي /n المتحدث مايكي ."; 
+    
     const galleryContainer = document.getElementById('galleryContainer');
     const currentImage = document.getElementById('currentImage');
     const imageText = document.getElementById('imageText');
@@ -25,20 +19,20 @@ document.addEventListener('DOMContentLoaded', function() {
         document.removeEventListener('click', initAudio);
     }, { once: true });
 
-    // Canvas setup
+    // Canvas setup (unchanged)
     const canvas = document.getElementById('birthdayRain');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     
-    // Rain elements
+    // Rain elements (unchanged)
     const letters = "ッ".split('');
     const flowers = ['🌹', '🌷', '💮', '🪷', '🏵️', '🌺', '🥀', '🌼', '🌸'];
     const fontSize = 16;
     const columns = Math.floor(canvas.width / fontSize);
     const drops = [];
     
-    // Initialize drops
+    // Initialize drops (unchanged)
     for (let i = 0; i < columns; i++) {
         drops[i] = {
             y: Math.random() * -100,
@@ -49,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
         };
     }
     
-    // Animation loop
+    // Animation loop (unchanged)
     function animate() {
         ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -76,34 +70,23 @@ document.addEventListener('DOMContentLoaded', function() {
     
     animate();
     
-    function showImage(index) {
-        const imgPath = imagePaths[index];
+    function showSingleImage() {
         const img = new Image();
         img.onload = function() {
-            currentImage.src = imgPath;
-            imageText.textContent = imageTexts[index];
+            currentImage.src = singleImagePath;
+            imageText.textContent = singleImageText;
         };
         img.onerror = function() {
             currentImage.src = 'img/notfound.jpg';
-            imageText.textContent = "Image not found - " + imageTexts[index];
+            imageText.textContent = "Image not found";
         };
-        img.src = imgPath;
+        img.src = singleImagePath;
     }
 
     function startGallery() {
         loginContainer.style.display = 'none';
         galleryContainer.style.display = 'flex';
-        showImage(0);
-        
-        setInterval(() => {
-            currentIndex = (currentIndex + 1) % imagePaths.length;
-            showImage(currentIndex);
-            
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        }, 4000); 
+        showSingleImage(); // Just show the single image once
     }
     
     document.getElementById('passwordForm').addEventListener('submit', function(e) {
@@ -112,10 +95,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const status = document.getElementById('statusMessage');
         
         if (input.value === 'ZD412') {
-            status.textContent = "Access granted! Loading gallery...";
+            status.textContent = "Access granted! Loading image...";
             status.style.color = "#0f0";
             successSound.play();
-            setTimeout(startGallery, 4000);
+            setTimeout(startGallery, 2000); // Reduced delay since we're only loading one image
         } else {
             status.textContent = "Invalid password! Try again";
             status.style.color = "#f00";
