@@ -209,3 +209,34 @@ button::before {
 button:hover::before {
     left: 100%;
 }
+
+.gallery-container {
+    flex-direction: row; /* Change to horizontal layout */
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.image-display {
+    max-width: 50%;
+    flex: 1;
+    min-width: 300px;
+}
+
+.spotify-embed {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    justify-content: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .gallery-container {
+        flex-direction: column;
+    }
+    .image-display, .spotify-embed {
+        max-width: 100%;
+    }
+}
