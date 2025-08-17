@@ -72,7 +72,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Load content
                 currentImage.src = 'img/T1.png';
-                imageText.textContent = "حبيت اقول لك روح انتحر مصدق انه في هدية لك ما في الا هاذي الصورة تكفي و توفي <br> المتحدث مايكي .";
+             imageText.innerHTML = 
+                "حبيت اقول لك روح انتحر<br>" +
+                "مصدق انه في هدية لك<br>" +
+                "ما في الا هاذي الصورة تكفي و توفي<br>" +
+                "المتحدث مايكي";
             }, 800);
         } else {
             statusMessage.textContent = 'Wrong password! Try again';
