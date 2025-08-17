@@ -1,38 +1,29 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const bgMusic = document.getElementById('bgMusic');
-    const successSound = document.getElementById('successSound');
-    bgMusic.volume = 0.3;
-    successSound.volume = 0.7;
-
-    const singleImagePath = 'img/T1.png';
-    const singleImageText = "حبيت اقول لك روح انتحر مصدق انه في هدية لك ما في الا هاذي الصورة تكفي و توفي       المتحدث مايكي .";
-    
-    const galleryContainer = document.getElementById('galleryContainer');
-    const currentImage = document.getElementById('currentImage');
-    const imageText = document.getElementById('imageText');
-    const loginContainer = document.getElementById('loginContainer');
-
+    // Canvas setup
     const canvas = document.getElementById('birthdayRain');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     
+    // Rain elements
     const letters = "ッ".split('');
     const flowers = ['🌹', '🌷', '💮', '🪷', '🏵️', '🌺', '🥀', '🌼', '🌸'];
-    const fontSize = 16;
+    const fontSize = 20;
     const columns = Math.floor(canvas.width / fontSize);
     const drops = [];
     
+    // Initialize drops
     for (let i = 0; i < columns; i++) {
         drops[i] = {
             y: Math.random() * -100,
             char: Math.random() > 0.3 ? 
                 letters[Math.floor(Math.random() * letters.length)] : 
                 flowers[Math.floor(Math.random() * flowers.length)],
-            speed: 1 + Math.random() * 2
+            speed: 1 + Math.random() * 3
         };
     }
     
+    // Animation loop
     function animate() {
         ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -59,41 +50,32 @@ document.addEventListener('DOMContentLoaded', function() {
     
     animate();
     
-    function showSingleImage() {
-        const img = new Image();
-        img.onload = function() {
-            currentImage.src = singleImagePath;
-            imageText.textContent = singleImageText;
-        };
-        img.onerror = function() {
-            currentImage.src = 'img/notfound.jpg';
-            imageText.textContent = "Image not found";
-        };
-        img.src = singleImagePath;
-    }
-
-    function startGallery() {
-        loginContainer.style.display = 'none';
-        galleryContainer.style.display = 'flex';
-        showSingleImage();
-        bgMusic.play().catch(e => console.log("Audio play failed:", e));
-    }
+    // Password system
+    const passwordForm = document.getElementById('passwordForm');
+    const passwordInput = document.getElementById('passwordInput');
+    const statusMessage = document.getElementById('statusMessage');
+    const loginContainer = document.getElementById('loginContainer');
+    const galleryContainer = document.getElementById('galleryContainer');
+    const currentImage = document.getElementById('currentImage');
+    const imageText = document.getElementById('imageText');
     
-    document.getElementById('passwordForm').addEventListener('submit', function(e) {
+    passwordForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        const input = document.getElementById('passwordInput');
-        const status = document.getElementById('statusMessage');
         
-        if (input.value === 'ZD412') {
-            status.textContent = "Access granted! Loading image...";
-            status.style.color = "#0f0";
-            successSound.play();
-            setTimeout(startGallery, 500);
+        if (passwordInput.value === 'ZD412') {
+            statusMessage.textContent = 'Access granted!';
+            statusMessage.style.color = '#0f0';
+            
+            loginContainer.style.display = 'none';
+            galleryContainer.style.display = 'flex';
+            
+            // Load content
+            currentImage.src = 'img/T1.png';
+            imageText.textContent = "حبيت اقول لك روح انتحر مصدق انه في هدية لك ما في الا هاذي الصورة تكفي و توفي     المتحدث مايكي .";
         } else {
-            status.textContent = "Invalid password! Try again";
-            status.style.color = "#f00";
-            input.style.animation = "shake 0.5s";
-            setTimeout(() => input.style.animation = "", 500);
+            statusMessage.textContent = 'Wrong password!';
+            statusMessage.style.color = '#f00';
+            passwordInput.value = '';
         }
     });
     
