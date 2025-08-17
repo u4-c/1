@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize drops
     for (let i = 0; i < columns; i++) {
         drops[i] = {
-            y: Math.random() * -100,
+            y: Math.random() * -canvas.height,
             char: Math.random() > 0.3 ? 
                 letters[Math.floor(Math.random() * letters.length)] : 
                 flowers[Math.floor(Math.random() * flowers.length)],
@@ -63,19 +63,22 @@ document.addEventListener('DOMContentLoaded', function() {
         e.preventDefault();
         
         if (passwordInput.value === 'ZD412') {
-            statusMessage.textContent = 'Access granted!';
+            statusMessage.textContent = 'Access granted! Loading...';
             statusMessage.style.color = '#0f0';
             
-            loginContainer.style.display = 'none';
-            galleryContainer.style.display = 'flex';
-            
-            // Load content
-            currentImage.src = 'img/T1.png';
-            imageText.textContent = "حبيت اقول لك روح انتحر مصدق انه في هدية لك ما في الا هاذي الصورة تكفي و توفي     المتحدث مايكي .";
+            setTimeout(function() {
+                loginContainer.style.display = 'none';
+                galleryContainer.style.display = 'flex';
+                
+                // Load content
+                currentImage.src = 'img/T1.png';
+                imageText.textContent = "حبيت اقول لك روح انتحر مصدق انه في هدية لك ما في الا هاذي الصورة تكفي و توفي <br> المتحدث مايكي .";
+            }, 800);
         } else {
-            statusMessage.textContent = 'Wrong password!';
+            statusMessage.textContent = 'Wrong password! Try again';
             statusMessage.style.color = '#f00';
             passwordInput.value = '';
+            passwordInput.focus();
         }
     });
     
