@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     successSound.volume = 0.7;
 
     const singleImagePath = 'img/T1.png';
-    const singleImageText = "حبيت اقول لك روح انتحر مصدق انه في هدية لك ما في الا هاذي الصورة تكفي و توفي /n المتحدث مايكي .";
+    const singleImageText = "حبيت اقول لك روح انتحر مصدق انه في هدية لك ما في الا هاذي الصورة تكفي و توفي       المتحدث مايكي .";
     
     const galleryContainer = document.getElementById('galleryContainer');
     const currentImage = document.getElementById('currentImage');
